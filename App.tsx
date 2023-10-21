@@ -1,22 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ApplicationProvider } from '@ui-kitten/components';
+import * as eva from '@eva-design/eva';
+import { HomeScreen } from './components/HomeScreen';
 
-function App() {
+function App({ children = <HomeScreen /> }: { children?: React.ReactNode }) {
   return (
-    <View style={styles.container}>
-      <Text>emojipet</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ApplicationProvider {...eva} theme={eva.light}>
+      {children}
+    </ApplicationProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'blue',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default App;
