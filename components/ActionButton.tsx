@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { add, round } from 'lodash';
+import { add, multiply } from 'lodash';
 import { Pressable, StyleSheet } from 'react-native';
 import { CircularProgressBar, Layout, Text } from '@ui-kitten/components';
 
@@ -10,21 +10,21 @@ function ActionButton({ emoji }: { emoji: string }) {
       accessibilityRole="button"
       accessibilityLabel={emoji}
       accessibilityValue={{
-        max: 1,
+        max: 100,
         min: 0,
         now: level,
-        text: `${level}`,
+        text: `${level} percent`,
       }}
       onPress={() =>
         setLevel((prev) => {
-          const update = round(add(prev, 0.1), 2);
-          return update > 1 ? 1 : update;
+          const update = add(prev, 10);
+          return update > 100 ? 100 : update;
         })
       }
     >
       <CircularProgressBar
         animating={false} // TODO: make this true
-        progress={level}
+        progress={multiply(level, 0.01)}
         renderIcon={() => <Text category="h2">{emoji}</Text>}
       />
     </Pressable>

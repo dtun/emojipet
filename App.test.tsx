@@ -20,39 +20,35 @@ describe('App', () => {
     await userEvent.press(screen.getByLabelText('🍎'));
 
     expect(screen.getByLabelText('🍎')).toHaveAccessibilityValue({
-      max: 1,
+      max: 100,
       min: 0,
-      now: 0.1,
-      text: 0.1,
+      now: 10,
     });
 
     await userEvent.press(screen.getByLabelText('🍎'));
 
     expect(screen.getByLabelText('🍎')).toHaveAccessibilityValue({
-      max: 1,
+      max: 100,
       min: 0,
-      now: 0.2,
-      text: 0.2,
+      now: 20,
     });
 
     await userEvent.press(screen.getByLabelText('💧'));
     await userEvent.press(screen.getByLabelText('💧'));
 
     expect(screen.getByLabelText('💧')).toHaveAccessibilityValue({
-      max: 1,
+      max: 100,
       min: 0,
-      now: 0.2,
-      text: 0.2,
+      now: 20,
     });
 
     await userEvent.press(screen.getByLabelText('⚽️'));
     await userEvent.press(screen.getByLabelText('⚽️'));
 
     expect(screen.getByLabelText('⚽️')).toHaveAccessibilityValue({
-      max: 1,
+      max: 100,
       min: 0,
-      now: 0.2,
-      text: 0.2,
+      now: 20,
     });
   });
 
@@ -64,20 +60,18 @@ describe('App', () => {
     }
 
     expect(screen.getByLabelText('🍎')).toHaveAccessibilityValue({
-      max: 1,
+      max: 100,
       min: 0,
-      now: 1,
-      text: 1,
+      now: 100,
     });
 
     // This is the 11th press and should not increase the value
     await userEvent.press(screen.getByLabelText('🍎'));
 
     expect(screen.getByLabelText('🍎')).toHaveAccessibilityValue({
-      max: 1,
+      max: 100,
       min: 0,
-      now: 1,
-      text: 1,
+      now: 100,
     });
   });
 });
