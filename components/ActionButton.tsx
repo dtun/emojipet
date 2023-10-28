@@ -3,6 +3,10 @@ import { add, multiply } from 'lodash';
 import { Pressable, StyleSheet } from 'react-native';
 import { CircularProgressBar, Layout, Text } from '@ui-kitten/components';
 
+const min = 0;
+const max = 100;
+const step = 10;
+
 function ActionButton({ emoji }: { emoji: string }) {
   const [level, setLevel] = useState(0);
   return (
@@ -10,15 +14,15 @@ function ActionButton({ emoji }: { emoji: string }) {
       accessibilityRole="button"
       accessibilityLabel={emoji}
       accessibilityValue={{
-        max: 100,
-        min: 0,
+        max,
+        min,
         now: level,
         text: `${level} percent`,
       }}
       onPress={() =>
         setLevel((prev) => {
-          const update = add(prev, 10);
-          return update > 100 ? 100 : update;
+          const update = add(prev, step);
+          return update > max ? max : update;
         })
       }
     >
