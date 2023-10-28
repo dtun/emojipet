@@ -17,7 +17,7 @@ function ActionButton({ emoji }: { emoji: string }) {
       onPress={() =>
         setLevel((prev) => {
           const update = prev + 0.1;
-          return update > 1 ? 1 : update;
+          return update > 1 ? 1 : Math.ceil(update * 10);
         })
       }
     >

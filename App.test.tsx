@@ -55,4 +55,29 @@ describe('App', () => {
       text: 0.2,
     });
   });
+
+  it('can feed up to 100%', async () => {
+    render(<App />);
+
+    for (let i = 0; i < 10; i++) {
+      await userEvent.press(screen.getByLabelText('🍎'));
+    }
+
+    expect(screen.getByLabelText('🍎')).toHaveAccessibilityValue({
+      max: 1,
+      min: 0,
+      now: 1,
+      text: 1,
+    });
+
+    // This is the 11th press and should not increase the value
+    await userEvent.press(screen.getByLabelText('🍎'));
+
+    expect(screen.getByLabelText('🍎')).toHaveAccessibilityValue({
+      max: 1,
+      min: 0,
+      now: 1,
+      text: 1,
+    });
+  });
 });
