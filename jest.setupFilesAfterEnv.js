@@ -1,3 +1,1 @@
-// beforeAll(() => {});
-// afterEach(() => {});
-// afterAll(() => {});
+import '@testing-library/jest-native/extend-expect';
