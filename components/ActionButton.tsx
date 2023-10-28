@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { add, round } from 'lodash';
 import { Pressable, StyleSheet } from 'react-native';
 import { CircularProgressBar, Layout, Text } from '@ui-kitten/components';
 
@@ -16,8 +17,8 @@ function ActionButton({ emoji }: { emoji: string }) {
       }}
       onPress={() =>
         setLevel((prev) => {
-          const update = prev + 0.1;
-          return update > 1 ? 1 : Math.ceil(update * 10);
+          const update = round(add(prev, 0.1), 2);
+          return update > 1 ? 1 : update;
         })
       }
     >
