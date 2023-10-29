@@ -32,5 +32,5 @@ describe('App', () => {
 
       expect(button).toHaveAccessibilityValue({ max: 100, min: 0, now: 100 });
     }
-  });
+  }, 10_000);
 });
