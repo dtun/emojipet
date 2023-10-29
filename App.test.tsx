@@ -11,14 +11,10 @@ afterAll(() => {
 
 describe('App', () => {
   it('can feed, water, and play up to 100%', async () => {
-    const feed = '🍎';
-    const water = '💧';
-    const play = '⚽️';
-
     render(<App />);
 
-    for (const emoji of [feed, water, play]) {
-      const button = screen.getByLabelText(emoji);
+    for (const action of ['feed', 'water', 'play']) {
+      const button = screen.getByLabelText(action);
 
       const tenPresses = 10;
       for (let i = 0; i < tenPresses; i++) {

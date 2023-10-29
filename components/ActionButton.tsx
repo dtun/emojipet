@@ -7,12 +7,20 @@ const min = 0;
 const max = 100;
 const step = 10;
 
-function ActionButton({ emoji }: { emoji: string }) {
+type Action = 'feed' | 'water' | 'play';
+
+const actionEmojiMap = {
+  feed: '🍎',
+  water: '💧',
+  play: '⚽️',
+} as const;
+
+function ActionButton({ action }: { action: Action }) {
   const [level, setLevel] = useState(0);
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={emoji}
+      accessibilityLabel={action}
       accessibilityValue={{
         max,
         min,
@@ -29,16 +37,21 @@ function ActionButton({ emoji }: { emoji: string }) {
       <CircularProgressBar
         animating={false} // TODO: make this true
         progress={multiply(level, 0.01)}
-        renderIcon={() => <Text category="h2">{emoji}</Text>}
+        renderIcon={() => <Text category="h2">{actionEmojiMap[action]}</Text>}
       />
     </Pressable>
   );
 }
 
-function ActionButtonWrapper({ children }: { children: React.ReactNode }) {
-  return <Layout style={STYLES.layout}>{children}</Layout>;
-}
+ActionButton.Feed = () => <ActionButton action="feed" />;
 
+ActionButton.Play = () => <ActionButton action="play" />;
+
+ActionButton.Water = () => <ActionButton action="water" />;
+
+ActionButton.Wrapper = ({ children }: { children: React.ReactNode }) => (
+  <Layout style={STYLES.layout}>{children}</Layout>
+);
 const STYLES = StyleSheet.create({
   layout: {
     flexDirection: 'row',
@@ -48,4 +61,4 @@ const STYLES = StyleSheet.create({
   },
 });
 
-export { ActionButton, ActionButtonWrapper };
+export { Action, ActionButton };

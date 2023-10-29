@@ -1,24 +1,20 @@
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { Layout, Text, TopNavigation } from '@ui-kitten/components';
-import { ActionButton, ActionButtonWrapper } from './ActionButton';
+import { ActionButton } from './ActionButton';
 
 function Root() {
   return (
     <SafeAreaView style={STYLES.sav}>
-      <TopNavigation
-        alignment="center"
-        title="emojipet"
-        // accessoryRight={() => <Text>menu</Text>}
-      />
+      <TopNavigation alignment="center" title="emojipet" />
       <Layout style={STYLES.layout}>
         <Text category="h1" style={STYLES.h1}>
           😀
         </Text>
-        <ActionButtonWrapper>
-          <ActionButton emoji={'🍎'} />
-          <ActionButton emoji={'💧'} />
-          <ActionButton emoji={'⚽️'} />
-        </ActionButtonWrapper>
+        <ActionButton.Wrapper>
+          <ActionButton.Feed />
+          <ActionButton.Play />
+          <ActionButton.Water />
+        </ActionButton.Wrapper>
       </Layout>
     </SafeAreaView>
   );
