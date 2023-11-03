@@ -20,7 +20,9 @@ describe('App', () => {
   it('can feed, water, and play up to 100%', async () => {
     render(<App />);
 
-    await waitFor(() => expect(screen.queryByTestId('Spinner')).toBeNull());
+    await waitFor(() =>
+      expect(screen.queryByLabelText('Loading...')).toBeNull()
+    );
 
     for (const action of ['feed', 'water', 'play']) {
       const button = screen.getByLabelText(action);
@@ -42,7 +44,7 @@ describe('App', () => {
     }
   }, 10_000);
 
-  it('can use data passed from AsyncStorage', async () => {
+  it('can use persisted data', async () => {
     jest.spyOn(AsyncStorage, 'getItem').mockResolvedValue(
       JSON.stringify([
         { type: 'feed', timestamp: 1698983256877 },
@@ -54,7 +56,9 @@ describe('App', () => {
 
     render(<App />);
 
-    await waitFor(() => expect(screen.queryByTestId('Spinner')).toBeNull());
+    await waitFor(() =>
+      expect(screen.queryByLabelText('Loading...')).toBeNull()
+    );
 
     for (const action of ['feed', 'water', 'play']) {
       const button = screen.getByLabelText(action);

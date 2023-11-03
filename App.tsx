@@ -7,7 +7,7 @@ import { Preloader } from './state/Preloader';
 function App({ children = <Root /> }: { children?: React.ReactNode }) {
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
-      <Suspense fallback={<Spinner testID="Spinner" />}>
+      <Suspense fallback={<Spinner accessibilityLabel="Loading..." />}>
         <Preloader />
         {children}
       </Suspense>
