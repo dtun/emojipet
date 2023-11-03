@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { add, multiply } from 'lodash';
+import { useAtom } from 'jotai';
+import { multiply } from 'lodash';
 import { Pressable, StyleSheet } from 'react-native';
 import { CircularProgressBar, Layout, Text } from '@ui-kitten/components';
+import { actionAtom } from '../state/action';
 
 const min = 0;
 const max = 100;
@@ -16,7 +17,10 @@ const actionEmojiMap = {
 } as const;
 
 function ActionButton({ action }: { action: Action }) {
-  const [level, setLevel] = useState(0);
+  const [actions, setActions] = useAtom(actionAtom);
+  const filteredActions = actions?.filter((a) => a.type === action);
+  const level = Math.min(filteredActions.length * step, 100);
+
   return (
     <Pressable
       accessibilityRole="button"
@@ -27,12 +31,9 @@ function ActionButton({ action }: { action: Action }) {
         now: level,
         text: `${level} percent`,
       }}
-      onPress={() =>
-        setLevel((prev) => {
-          const update = add(prev, step);
-          return update > max ? max : update;
-        })
-      }
+      onPress={() => {
+        setActions([...actions, { type: action, timestamp: Date.now() }]);
+      }}
     >
       <CircularProgressBar
         animating={false} // TODO: make this true

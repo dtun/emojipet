@@ -1,11 +1,16 @@
-import { ApplicationProvider } from '@ui-kitten/components';
+import { ApplicationProvider, Spinner } from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
 import { Root } from './components/Root';
+import { Suspense } from 'react';
+import { Preloader } from './state/Preloader';
 
 function App({ children = <Root /> }: { children?: React.ReactNode }) {
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
-      {children}
+      <Suspense fallback={<Spinner testID="Spinner" />}>
+        <Preloader />
+        {children}
+      </Suspense>
     </ApplicationProvider>
   );
 }
