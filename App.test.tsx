@@ -7,6 +7,7 @@ import {
 } from '@testing-library/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import App from './App';
+import { actionKey } from './state/action';
 
 beforeAll(() => {
   jest.useFakeTimers();
@@ -45,14 +46,18 @@ describe('App', () => {
   }, 10_000);
 
   it('can use persisted data', async () => {
-    jest.spyOn(AsyncStorage, 'getItem').mockResolvedValue(
-      JSON.stringify([
-        { type: 'feed', timestamp: 1698983256877 },
-        { type: 'play', timestamp: 1698983257444 },
-        { type: 'water', timestamp: 1698983258343 },
-        { type: 'water', timestamp: 1698983258593 },
-      ])
-    );
+    jest.spyOn(AsyncStorage, 'getItem').mockImplementationOnce((key) => {
+      if (key !== actionKey) return Promise.resolve(null);
+
+      return Promise.resolve(
+        JSON.stringify([
+          { type: 'feed', timestamp: 1698983256877 },
+          { type: 'play', timestamp: 1698983257444 },
+          { type: 'water', timestamp: 1698983258343 },
+          { type: 'water', timestamp: 1698983258593 },
+        ])
+      );
+    });
 
     render(<App />);
 

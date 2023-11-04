@@ -41,4 +41,4 @@ const atomWithAsyncStorage = (
 
 const actionAtom = atomWithAsyncStorage();
 
-export { actionAtom, ActionRecord };
+export { actionAtom, actionKey, ActionRecord };
