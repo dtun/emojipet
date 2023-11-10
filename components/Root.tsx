@@ -7,9 +7,11 @@ function Root() {
     <SafeAreaView style={STYLES.sav}>
       <TopNavigation alignment="center" title="emojipet" />
       <Layout style={STYLES.layout}>
-        <Text category="h1" style={STYLES.h1}>
-          😀
-        </Text>
+        <Layout style={STYLES.textLayout}>
+          <Text category="h1" style={STYLES.h1}>
+            😀
+          </Text>
+        </Layout>
         <ActionButton.Wrapper>
           <ActionButton.Feed />
           <ActionButton.Play />
@@ -23,6 +25,7 @@ function Root() {
 const STYLES = StyleSheet.create({
   sav: { flex: 1, backgroundColor: 'transparent' },
   layout: { alignItems: 'center', flex: 1, justifyContent: 'space-evenly' },
+  textLayout: { flex: 1, justifyContent: 'center' },
   h1: { fontSize: 96 },
 });
 

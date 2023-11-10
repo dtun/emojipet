@@ -39,6 +39,7 @@ function ActionButton({ action }: { action: Action }) {
         animating={false} // TODO: make this true
         progress={multiply(level, 0.01)}
         renderIcon={() => <Text category="h2">{actionEmojiMap[action]}</Text>}
+        status="success"
       />
     </Pressable>
   );
