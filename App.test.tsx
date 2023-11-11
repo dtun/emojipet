@@ -45,6 +45,32 @@ describe('App', () => {
     }
   }, 10_000);
 
+  it('cannot feed, water, or play beyond 100%', async () => {
+    jest.spyOn(AsyncStorage, 'getItem').mockImplementationOnce((key) => {
+      if (key !== actionKey) return Promise.resolve(null);
+
+      return Promise.resolve(
+        JSON.stringify([
+          ...Array(10).fill({ type: 'feed', timestamp: Date.now() }),
+          ...Array(10).fill({ type: 'play', timestamp: Date.now() }),
+          ...Array(10).fill({ type: 'water', timestamp: Date.now() }),
+        ])
+      );
+    });
+
+    render(<App />);
+
+    await waitFor(() =>
+      expect(screen.queryByLabelText('Loading...')).toBeNull()
+    );
+
+    for (const action of ['feed', 'water', 'play']) {
+      const button = screen.getByLabelText(action);
+
+      expect(button).toBeDisabled();
+    }
+  });
+
   it('can use persisted data', async () => {
     jest.spyOn(AsyncStorage, 'getItem').mockImplementationOnce((key) => {
       if (key !== actionKey) return Promise.resolve(null);

@@ -34,6 +34,7 @@ function ActionButton({ action }: { action: Action }) {
       onPress={() => {
         setActions([...actions, { type: action, timestamp: Date.now() }]);
       }}
+      disabled={level === max}
     >
       <CircularProgressBar
         animating={false} // TODO: make this true
