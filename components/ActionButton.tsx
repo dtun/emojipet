@@ -35,6 +35,7 @@ function ActionButton({ action }: { action: Action }) {
         setActions([...actions, { type: action, timestamp: Date.now() }]);
       }}
       disabled={level === max}
+      style={STYLES.pressable}
     >
       <CircularProgressBar
         animating={false} // TODO: make this true
@@ -42,6 +43,7 @@ function ActionButton({ action }: { action: Action }) {
         renderIcon={() => <Text category="h2">{actionEmojiMap[action]}</Text>}
         status="success"
       />
+      <Text category="h3">{action}</Text>
     </Pressable>
   );
 }
@@ -56,12 +58,8 @@ ActionButton.Wrapper = ({ children }: { children: React.ReactNode }) => (
   <Layout style={STYLES.layout}>{children}</Layout>
 );
 const STYLES = StyleSheet.create({
-  layout: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    width: '100%',
-    alignItems: 'center',
-  },
+  layout: { flexDirection: 'row', alignItems: 'center' },
+  pressable: { flex: 1, alignItems: 'center' },
 });
 
 export { Action, ActionButton };

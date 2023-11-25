@@ -29,17 +29,13 @@ describe('App', () => {
       const button = screen.getByLabelText(action);
 
       for (let i = 0; i < 10; i++) {
-        await act(() => {
-          userEvent.press(button);
-        });
+        await act(() => userEvent.press(button));
       }
 
       expect(button).toHaveAccessibilityValue({ max: 100, min: 0, now: 100 });
 
       // This is the 11th press and should not increase the value
-      await act(() => {
-        userEvent.press(button);
-      });
+      await act(() => userEvent.press(button));
 
       expect(button).toHaveAccessibilityValue({ max: 100, min: 0, now: 100 });
     }
@@ -95,12 +91,10 @@ describe('App', () => {
       const button = screen.getByLabelText(action);
 
       for (let i = 0; i < 10; i++) {
-        await act(() => {
-          userEvent.press(button);
-        });
+        await act(() => userEvent.press(button));
       }
 
       expect(button).toHaveAccessibilityValue({ max: 100, min: 0, now: 100 });
     }
-  }, 10_000);
+  });
 });
