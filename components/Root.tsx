@@ -33,8 +33,15 @@ function Root() {
 
 const STYLES = StyleSheet.create({
   sav: { flex: 1, backgroundColor: 'transparent' },
-  layout: { alignItems: 'center', flex: 1 },
-  textLayout: { justifyContent: 'center', marginVertical: 24 },
+  layout: {
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    height: '40%',
+  },
+  textLayout: {
+    justifyContent: 'center',
+    marginVertical: 24,
+  },
   h1: { fontSize: 96 },
   bottomSheet: {
     flex: 1,
