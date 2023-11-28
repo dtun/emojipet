@@ -1,6 +1,8 @@
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { Layout, Text, TopNavigation } from '@ui-kitten/components';
+import BottomSheet from '@gorhom/bottom-sheet';
 import { ActionButton } from './ActionButton';
+import { ActionList } from './ActionList';
 
 function Root() {
   return (
@@ -18,6 +20,13 @@ function Root() {
           <ActionButton.Water />
         </ActionButton.Wrapper>
       </Layout>
+      <BottomSheet
+        backgroundStyle={STYLES.bottomSheet}
+        index={1}
+        snapPoints={['25%', '50%', '75%']}
+      >
+        <ActionList />
+      </BottomSheet>
     </SafeAreaView>
   );
 }
@@ -27,6 +36,11 @@ const STYLES = StyleSheet.create({
   layout: { alignItems: 'center', flex: 1 },
   textLayout: { justifyContent: 'center', marginVertical: 24 },
   h1: { fontSize: 96 },
+  bottomSheet: {
+    flex: 1,
+    borderColor: 'lightgrey',
+    borderWidth: 2,
+  },
 });
 
 export { Root };

@@ -13,11 +13,25 @@ beforeAll(() => {
   jest.useFakeTimers();
 });
 
+beforeEach(() => {
+  jest.resetAllMocks();
+});
+
 afterAll(() => {
   jest.useRealTimers();
 });
 
 describe('App', () => {
+  it('informs of no actions', async () => {
+    render(<App />);
+
+    await waitFor(() =>
+      expect(screen.queryByLabelText('Loading...')).toBeNull()
+    );
+
+    expect(screen.getByText('No actions')).toBeVisible();
+  });
+
   it('can feed, water, and play up to 100%', async () => {
     render(<App />);
 
