@@ -57,6 +57,7 @@ ActionButton.Water = () => <ActionButton action="water" />;
 ActionButton.Wrapper = ({ children }: { children: React.ReactNode }) => (
   <Layout style={STYLES.layout}>{children}</Layout>
 );
+
 const STYLES = StyleSheet.create({
   layout: { flexDirection: 'row', alignItems: 'center' },
   pressable: { flex: 1, alignItems: 'center' },
