@@ -1,8 +1,8 @@
-import { format } from 'date-fns';
 import { Layout, Text } from '@ui-kitten/components';
 import { FlatList } from 'react-native-gesture-handler';
 import { useAtom } from 'jotai';
 import { actionAtom } from '../state/action';
+import { formatTimestamp } from '../utils/formatTimestamp';
 
 function ActionList() {
   const [actions] = useAtom(actionAtom);
@@ -16,16 +16,12 @@ function ActionList() {
       ListEmptyComponent={<Text>No actions</Text>}
       renderItem={({ item }) => (
         <Text style={{ padding: 16 }}>
-          {item.type} - {getFormatTimestamp(item.timestamp)}
+          {item.type} - {formatTimestamp(item.timestamp)}
         </Text>
       )}
       style={{ flexGrow: 1 }}
     />
   );
-}
-
-function getFormatTimestamp(timestamp: string) {
-  return format(new Date(timestamp), 'eee h:mm:ss a');
 }
 
 export { ActionList };
