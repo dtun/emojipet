@@ -10,11 +10,11 @@ const step = 10;
 
 type Action = 'feed' | 'water' | 'play';
 
-const actionEmojiMap = {
+const actionEmojiMap: Record<Action, string> = {
   feed: '🍎',
   water: '💧',
   play: '⚽️',
-} as const;
+};
 
 function ActionButton({ action }: { action: Action }) {
   const [actions, setActions] = useAtom(actionAtom);
